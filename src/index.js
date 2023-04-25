@@ -2,8 +2,9 @@ import Phaser from "phaser";
 import GameScene from "./scenes/game-scene";
 
 const SHARED_CONFIG={
-  width: 1000,
-  height:500,
+  width: 650,
+  height: 500,
+  pixelArt: true,
 
 }
 const config={
@@ -11,6 +12,7 @@ const config={
   ...SHARED_CONFIG,
   physics:{
     default:"arcade",
+    //pixelAr
     arcade:{
       gravity:{y:400},
       debug: true

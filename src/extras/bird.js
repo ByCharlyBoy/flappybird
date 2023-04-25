@@ -8,6 +8,7 @@ export default class Bird extends Phaser.GameObjects.Sprite{
         scene.physics.add.existing(this);
         scene.input.keyboard.on("keydown-SPACE",this.flap,this);
         scene.input.keyboard.on("keydown-W",this.flap,this);
+        this.blocked = false; 
         
         //limite de pantalla
         //this.body.setCollideWorldBounds(true);
@@ -19,7 +20,27 @@ export default class Bird extends Phaser.GameObjects.Sprite{
         callback();
     }
     flap(){
+        if (this.blocked) return; 
         this.body.velocity.y = -FLAP_VELOCITY;
     }
     
+    triggerLoseAnimation(endcallback){
+        this.setTint(0xFF0000); 
+        this.flap();
+        this.blendMode = true; 
+        const loseTimer = this.scene.time.addEvent({
+            delay: 2, 
+            callback: () => {
+                this.checkLoseAnimation(loseTimer, endcallback); 
+            }, 
+            loop: true
+        }) 
+    }
+
+    checkLoseAnimation(timer, endcallback){
+        if (this.getBounds().bottom < this.scene.config.height) {
+            timer.remove(); 
+            endcallback(); 
+        }
+    }
 }

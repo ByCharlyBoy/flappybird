@@ -14,6 +14,7 @@ export default class PipeSystem{
         this.pool=[];
         this.layer=layer;
         this.onPipeExited= ()=>{};
+        this.stooped = false; 
     }
 
     start(){
@@ -27,15 +28,27 @@ export default class PipeSystem{
          });
     } 
     update(){
-        for(let i=0;i<this.pipes.length;i++){
+      if(this.stooped) return; 
+
+      for(let i=0;i<this.pipes.length;i++){
             const pipe=this.pipes[i];
             if(pipe.hasExitScreen()){
                 this.moveToPool(pipe,i);
                 this.onPipeExited();
                 break;
             }
-        }
+        }   
     }
+
+    stop(){
+      
+      this.stooped = true; 
+      this.pipes.forEach( pipe => {
+        pipe.setVelocity(0);
+      })
+      
+    }
+    
     spawnPipe(){
        let pipe=null;
        //Object pooling
@@ -78,6 +91,10 @@ class Pipe{
     resetPosition(){
         this.upper.x=this.spawnX;
         this.lower.x=this.spawnX;
+        /*var spawnPosition=Phaser.Math.Between(...this.pipeSpawnPositionRange);
+        var gapSize=Phaser.Math.Between(...this.pipeGapSizeRange);
+        this.upper.y = spawnPosition; 
+        this.lower.y = spawnPosition; */
     }
     setVelocity(velocity){
         this.upper.body.velocity.x= -velocity;

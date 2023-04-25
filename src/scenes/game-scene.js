@@ -7,11 +7,11 @@ export default class GameScene extends Phaser.Scene{
         super();
         this.config=config;
         this.bird=null;
-        this.pipes=null;
+        this.pipeSystem=null;
         this.score=null;
 
         this.backgroundLayer={
-
+            
             background:null,
             game:null,
             ui:null
@@ -22,7 +22,7 @@ export default class GameScene extends Phaser.Scene{
         this.load.image("fondo","assets/sky.png");
         this.load.image("bird","assets/bird.png");
         this.load.image("pipe","assets/pipe.png");
-       this.load.image("pause_button","assets/pause.png")
+       this.load.image("pauseButton","assets/pause.png")
     }
     create(){
 
@@ -38,30 +38,36 @@ export default class GameScene extends Phaser.Scene{
         this.backgroundLayer.game.add(this.bird);
 
         //this.physics.add.collider(this.pipes, this.bird);
-        this.pipes=new PipeSystem(this,this.backgroundLayer.game);
-        this.physics.add.collider(this.bird,this.pipes.getGroup(),this.gameOver,null,this);
+        this.pipeSystem=new PipeSystem(this,this.backgroundLayer.game);
+        this.physics.add.collider(this.bird,this.pipeSystem.getGroup(),this.gameOver,null,this);
 
         this.score=new Score(this,16,16,this.backgroundLayer.ui);
-        var pause_button=this.add.image(this.config.width-10,10,"pause_button").setOrigin(1,0);
-        /*-> no funciona el button*/pause_button.on("pointer-down",this.pause,this);
+        var pauseButton=this.add.image(this.config.width-10,10,"pauseButton").setOrigin(1,0);
+        pauseButton.setOrigin(1, 0), 
+        pauseButton.setInteractive(),
+        pauseButton.setScale(3); 
+        pauseButton.on("pointerup",this.pause,this);
 
-        this.pipes.onPipeExited=()=>{
+        this.pipeSystem.onPipeExited=()=>{
             this.score.addScore(1);
         }
-        this.pipes.start();
+        this.pipeSystem.start();
     }
     update(){
         this.bird.checkOffbounds(()=>{
             this.gameOver();
         })
-        this.pipes.update();
+        this.pipeSystem.update();
     }
    
     
     gameOver(){
-        alert("Mamaste");
-        this.score.checkHighScore();
-        this.scene.restart();
+        this.pipeSystem.stop(); 
+        this.bird.triggerLoseAnimation(()=>{
+            this.score.checkHighScore();
+            this.scene.restart();
+        }); 
+        
     }
     pause(){
         this.physics.pause();
