@@ -6,6 +6,7 @@ export default class Bird extends Phaser.GameObjects.Sprite{
         this.scene=scene;
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.body.immovable = true; 
         scene.input.keyboard.on("keydown-SPACE",this.flap,this);
         scene.input.keyboard.on("keydown-W",this.flap,this);
         this.blocked = false; 
@@ -27,7 +28,7 @@ export default class Bird extends Phaser.GameObjects.Sprite{
     triggerLoseAnimation(endcallback){
         this.setTint(0xFF0000); 
         this.flap();
-        this.blendMode = true; 
+        this.blocked = true; 
         const loseTimer = this.scene.time.addEvent({
             delay: 2, 
             callback: () => {
@@ -38,7 +39,7 @@ export default class Bird extends Phaser.GameObjects.Sprite{
     }
 
     checkLoseAnimation(timer, endcallback){
-        if (this.getBounds().bottom < this.scene.config.height) {
+        if (this.getBounds().top > this.scene.config.height) {
             timer.remove(); 
             endcallback(); 
         }

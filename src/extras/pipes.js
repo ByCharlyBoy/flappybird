@@ -15,11 +15,12 @@ export default class PipeSystem{
         this.layer=layer;
         this.onPipeExited= ()=>{};
         this.stooped = false; 
+        this.spawnTimer = null; 
     }
 
     start(){
         this.spawnPipe();
-        this.scene.time.addEvent({
+        this.spawnTimer = this.scene.time.addEvent({
           delay: PIPE_SPAWN_TIME,
           callback: () => {
             this.spawnPipe();
@@ -41,8 +42,10 @@ export default class PipeSystem{
     }
 
     stop(){
-      
       this.stooped = true; 
+      if (this.spawnTimer){
+        this.spawnTimer.remove(); 
+      }
       this.pipes.forEach( pipe => {
         pipe.setVelocity(0);
       })

@@ -17,6 +17,8 @@ export default class GameScene extends Phaser.Scene{
             ui:null
             
         }
+
+        this.pauseButton = null; 
     } 
     preload(){
         this.load.image("fondo","assets/sky.png");
@@ -39,14 +41,15 @@ export default class GameScene extends Phaser.Scene{
 
         //this.physics.add.collider(this.pipes, this.bird);
         this.pipeSystem=new PipeSystem(this,this.backgroundLayer.game);
-        this.physics.add.collider(this.bird,this.pipeSystem.getGroup(),this.gameOver,null,this);
+        this.physics.add.collider(this.bird,this.pipeSystem.getGroup(), this.gameOver,null,this);
 
         this.score=new Score(this,16,16,this.backgroundLayer.ui);
-        var pauseButton=this.add.image(this.config.width-10,10,"pauseButton").setOrigin(1,0);
-        pauseButton.setOrigin(1, 0), 
-        pauseButton.setInteractive(),
-        pauseButton.setScale(3); 
-        pauseButton.on("pointerup",this.pause,this);
+        this.pauseButton=this.add.image(this.config.width - 10 , 10,"pauseButton")
+        .setOrigin(1, 0)
+        .setInteractive()
+        .setScale(3);
+        
+        this.pauseButton.on("pointerup", this.pause,this);
 
         this.pipeSystem.onPipeExited=()=>{
             this.score.addScore(1);
@@ -63,6 +66,8 @@ export default class GameScene extends Phaser.Scene{
     
     gameOver(){
         this.pipeSystem.stop(); 
+        this.pauseButton.setVisible(false);  
+        this.backgroundLayer.game.bringToTop(this.bird); 
         this.bird.triggerLoseAnimation(()=>{
             this.score.checkHighScore();
             this.scene.restart();
