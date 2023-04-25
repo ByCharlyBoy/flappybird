@@ -1,40 +1,24 @@
 import Bird from "../extras/bird";
 import PipeSystem from "../extras/pipes";
 import Score from "../extras/score";
+import FlappyBirdScene from "./flappy-bird-scene";
 
-export default class GameScene extends Phaser.Scene{
+export default class GameScene extends FlappyBirdScene{
     constructor(config){
-        super();
-        this.config=config;
+        super("GameScene", config);
         this.bird=null;
         this.pipeSystem=null;
         this.score=null;
-
-        this.backgroundLayer={
-            
-            background:null,
-            game:null,
-            ui:null
-            
-        }
-
         this.pauseButton = null; 
     } 
     preload(){
-        this.load.image("fondo","assets/sky.png");
+        
         this.load.image("bird","assets/bird.png");
         this.load.image("pipe","assets/pipe.png");
-       this.load.image("pauseButton","assets/pause.png")
+        this.load.image("pauseButton","assets/pause.png");
     }
     create(){
-
-        //instancea laayerr
-        this.backgroundLayer.background=this.add.layer();
-        this.backgroundLayer.game=this.add.layer();
-        this.backgroundLayer.ui=this.add.layer();
-
-        var fondo=this.add.image(0,0,"fondo").setOrigin(0.2,0.15);
-        this.backgroundLayer.background.add(fondo);
+        super.create(); 
 
         this.bird=new Bird(this,100,this.config.height/2,"bird");
         this.backgroundLayer.game.add(this.bird);

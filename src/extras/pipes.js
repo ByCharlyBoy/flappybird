@@ -10,9 +10,9 @@ export default class PipeSystem{
             allowGravity:false,
             immovable:true
           }); 
-        this.pipes=[];
-        this.pool=[];
-        this.layer=layer;
+        this.pipes = [];
+        this.pool = [];
+        this.layer = layer;
         this.onPipeExited= ()=>{};
         this.stooped = false; 
         this.spawnTimer = null; 
@@ -82,9 +82,9 @@ class Pipe{
     constructor(group,spawnX,layer){
         this.group=group;
         this.spawnX=spawnX;
-        this.pipeSpawnPositionRange=DEFAULT_PIPE_SPAWN_POSITION_RANGE;
-        this.pipeGapSizeRange=DEFAULT_PIPE_GAP_SIZE_RANGE;
-        var spawnPosition=Phaser.Math.Between(...this.pipeSpawnPositionRange);
+        this.pipeSpawnPositionRange = DEFAULT_PIPE_SPAWN_POSITION_RANGE;
+        this.pipeGapSizeRange = DEFAULT_PIPE_GAP_SIZE_RANGE;
+        var spawnPosition = Phaser.Math.Between(...this.pipeSpawnPositionRange);
         var gapSize=Phaser.Math.Between(...this.pipeGapSizeRange);
         this.upper=group.create(spawnX,spawnPosition,"pipe").setOrigin(0,1);
         this.lower=group.create(spawnX,spawnPosition+gapSize,"pipe").setOrigin(0);
@@ -92,16 +92,16 @@ class Pipe{
     }
 
     resetPosition(){
-        this.upper.x=this.spawnX;
-        this.lower.x=this.spawnX;
-        /*var spawnPosition=Phaser.Math.Between(...this.pipeSpawnPositionRange);
-        var gapSize=Phaser.Math.Between(...this.pipeGapSizeRange);
+        this.upper.x = this.spawnX;
+        this.lower.x = this.spawnX;
+        var spawnPosition = Phaser.Math.Between(...this.pipeSpawnPositionRange);
+        var gapSize = Phaser.Math.Between(...this.pipeGapSizeRange);
         this.upper.y = spawnPosition; 
-        this.lower.y = spawnPosition; */
+        this.lower.y = spawnPosition + gapSize; 
     }
     setVelocity(velocity){
-        this.upper.body.velocity.x= -velocity;
-        this.lower.body.velocity.x= -velocity;
+        this.upper.body.velocity.x = -velocity;
+        this.lower.body.velocity.x = -velocity;
     }
     setVisible(state){
         this.upper.visible=state;
