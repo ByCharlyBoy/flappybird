@@ -42,7 +42,7 @@ export default class MenuScene extends FlappyBirdScene {
     }
 
     scoreButton_OnClick(){
-        
+        this.scene.start("ScoreScene"); 
     }
 
     anyButton_OnMouseEnter(text){

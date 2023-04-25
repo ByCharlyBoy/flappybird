@@ -1,10 +1,11 @@
 import Phaser from "phaser";
 import GameScene from "./scenes/game-scene";
 import MenuScene from "./scenes/menu-scene";
+import ScoreScene from "./scenes/score-scene";
 
 const SHARED_CONFIG={
-  width: 650,
-  height: 500,
+  width: 650, //800
+  height: 500, //600
   pixelArt: true,
 
 }
@@ -22,7 +23,8 @@ const config={
   },
   scene:[
     new MenuScene(SHARED_CONFIG), 
-    new GameScene(SHARED_CONFIG)
+    new GameScene(SHARED_CONFIG),
+    new ScoreScene(SHARED_CONFIG)
   ]
   
 }
