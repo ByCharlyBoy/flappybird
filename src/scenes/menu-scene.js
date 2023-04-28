@@ -56,4 +56,4 @@ export default class MenuScene extends FlappyBirdScene {
     }
 }
 
-//hora andres --> 1:58
+//hora andres --> 3:22
