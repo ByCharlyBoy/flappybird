@@ -51,6 +51,18 @@ export default class PipeSystem{
       })
       
     }
+
+    pause(){
+      if(this.spawnTimer) {
+        this.spawnTimer.paused = true; 
+      }
+    }
+
+    resume(){
+      if(this.spawnTimer) {
+        this.spawnTimer.paused = false; 
+      }
+    }
     
     spawnPipe(){
        let pipe=null;

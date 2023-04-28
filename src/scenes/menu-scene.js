@@ -38,14 +38,16 @@ export default class MenuScene extends FlappyBirdScene {
     }
 
     playButton_OnClick(){
+        this.quitMenu(); 
         this.scene.start("GameScene"); 
     }
 
     scoreButton_OnClick(){
+        this.quitMenu(); 
         this.scene.start("ScoreScene"); 
     }
 
-    anyButton_OnMouseEnter(text){
+    anyButton_OnMouseEnter(text){ 
         text.setFill("#0F0"); 
     }
 
@@ -53,3 +55,5 @@ export default class MenuScene extends FlappyBirdScene {
         text.setFill("#FFF"); 
     }
 }
+
+//hora andres --> 1:58

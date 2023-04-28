@@ -7,7 +7,7 @@ const HIGH_SCORE_SAVE_KEY="high_score";
 export default class ScoreScene extends FlappyBirdScene{
     constructor(config){
         super("ScoreScene", config); 
-        this.score=null;
+        this.score = null;
 
     }
 
@@ -23,7 +23,11 @@ export default class ScoreScene extends FlappyBirdScene{
         .setOrigin(1, 0)
         .setInteractive(); 
 
-        back.on("pointerup", () => this.scene.start("MenuScene")); 
+        back.on("pointerup", () => {
+            this.quitMenu(); 
+            this.scene.start("MenuScene"); 
+        }); 
+        
         back.on("pointerover", () => back.setFill("#0F0")); 
         back.on("pointerout", () => back.setFill("#FFF"));
 
