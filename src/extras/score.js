@@ -1,6 +1,7 @@
 const CURRENT_SCORE_LABEL ="Score ";
 const HIGH_CSCORE_LABEL="High score: ";
 const HIGH_SCORE_SAVE_KEY="high_score";
+
 export default class score{
     constructor(scene,x,y,layer){
         this.scene=scene;
