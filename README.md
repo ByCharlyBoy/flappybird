@@ -6,7 +6,7 @@ Right click on the file "T-Rex-Game-master.zip" extract file
 2. Once extracted, we will open the file and select the address bar of the browser (which is above)
 and we will put in it "cmd"
 
-![imagen1](https://github.com/ByCharlyBoy/T-Rex-Game/blob/master/InstructiveImg/director_busqueda_Trex.png) ---->
+![imagen1](https://github.com/ByCharlyBoy/flappybird/blob/FlappyBird_Optimizado/Instructive_imgs/ruteFlappyBird.png) 
 
 3. This will open a black window where the path of our file will appear.
 
