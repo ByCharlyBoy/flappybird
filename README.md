@@ -23,8 +23,7 @@ This will cause and give us an ip address that we will have to copy and paste in
 As we will know what the ip is, it is normally called "http://localhost:8080/"
 And ready.
 
-![imagen4](https://github.com/ByCharlyBoy/T-Rex-Game/blob/master/InstructiveImg/npm_rin_dev_Trex.png)
------->
+![imagen4](https://github.com/ByCharlyBoy/flappybird/blob/FlappyBird_Optimizado/Instructive_imgs/FlappyBird_rundev.png)
 
 NOTE: if we close the cmd, the host will be closed. IF this happens to them, we will only have to repeat the
 Step 4
