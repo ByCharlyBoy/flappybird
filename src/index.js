@@ -4,7 +4,7 @@ import MenuScene from "./scenes/menu-scene";
 import ScoreScene from "./scenes/score-scene";
 
 const SHARED_CONFIG={
-  width: 400, //800
+  width: 620, //800
   height: 500, //600
   pixelArt: true,
 
